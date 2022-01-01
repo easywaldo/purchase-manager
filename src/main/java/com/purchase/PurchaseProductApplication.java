@@ -148,6 +148,7 @@ public class PurchaseProductApplication {
             orderInfoRepository.saveAll(List.of(
                 OrderInfo.builder()
                     .memberSeq(memberRepository.findById(1).get())
+                    .productCount(3)
                     .paymentPrice(productRepository.findById(1).get().getProductPrice())
                     .orderDate(LocalDateTime.now())
                     .productSeq(productRepository.findById(1).get())

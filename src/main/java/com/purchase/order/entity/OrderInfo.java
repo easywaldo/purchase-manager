@@ -35,6 +35,9 @@ public class OrderInfo {
     @Column(name = "order_date")
     private LocalDateTime orderDate;
 
+    @Column(name = "product_count")
+    private Integer productCount;
+
     @Column(name = "payment_price")
     private Integer paymentPrice;
 
@@ -44,12 +47,14 @@ public class OrderInfo {
                      Member memberSeq,
                      Product productSeq,
                      LocalDateTime orderDate,
+                     Integer productCount,
                      Integer paymentPrice) {
         this.orderInfoSeq = orderInfoSeq;
         this.orderPaymentSeq = orderPaymentSeq;
         this.memberSeq = memberSeq;
         this.productSeq = productSeq;
         this.orderDate = orderDate;
+        this.productCount = productCount;
         this.paymentPrice = paymentPrice;
     }
 }
