@@ -20,6 +20,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  accessTokenCookieName: accessToken
+  refreshTokenCookieName: refreshToken
+
+auth:
+  token:
+    key: purchase-product20220102#$
 
 api:
   key: 3xCv29981_Tx091dUx98_84PTx905EB

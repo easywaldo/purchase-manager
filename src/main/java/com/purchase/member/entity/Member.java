@@ -30,4 +30,10 @@ public class Member {
         this.memberId = memberId;
         this.memberPassword = memberPassword;
     }
+
+    @Transient
+    private String roleGroup;
+    public String getRoleGroup() {
+        return "general";
+    }
 }
