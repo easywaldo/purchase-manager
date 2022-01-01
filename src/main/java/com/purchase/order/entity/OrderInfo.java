@@ -14,10 +14,15 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "order_info")
 public class OrderInfo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_info_seq")
     private Integer orderInfoSeq;
+
+    @ManyToOne
+    @JoinColumn(name = "order_payment_seq", referencedColumnName = "order_payment_seq")
+    private OrderPayment orderPaymentSeq;
 
     @ManyToOne
     @JoinColumn(name = "member_seq", referencedColumnName = "member_seq")
@@ -35,11 +40,13 @@ public class OrderInfo {
 
     @Builder
     public OrderInfo(Integer orderInfoSeq,
+                     OrderPayment orderPaymentSeq,
                      Member memberSeq,
                      Product productSeq,
                      LocalDateTime orderDate,
                      Integer paymentPrice) {
         this.orderInfoSeq = orderInfoSeq;
+        this.orderPaymentSeq = orderPaymentSeq;
         this.memberSeq = memberSeq;
         this.productSeq = productSeq;
         this.orderDate = orderDate;
