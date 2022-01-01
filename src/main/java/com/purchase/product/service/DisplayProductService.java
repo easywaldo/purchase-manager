@@ -6,6 +6,7 @@ import com.purchase.querygenerator.ProductQueryGenerator;
 import com.purchase.querygenerator.command.SearchProductCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class DisplayProductService {
         this.productQueryGenerator = productQueryGenerator;
     }
 
+    @Transactional(readOnly = true)
     public List<ProductViewModel> selectProductList(SearchProductCommand searchCommand) {
         return this.productQueryGenerator.selectProductList(searchCommand);
     }
