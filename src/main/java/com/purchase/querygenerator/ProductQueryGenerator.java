@@ -1,7 +1,6 @@
 package com.purchase.querygenerator;
 
 import com.google.common.base.Strings;
-import com.purchase.category.entity.QCategory;
 import com.purchase.product.dto.ProductViewModel;
 import com.purchase.querygenerator.command.SearchProductCommand;
 import com.querydsl.core.BooleanBuilder;
