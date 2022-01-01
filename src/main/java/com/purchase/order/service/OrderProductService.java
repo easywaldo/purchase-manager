@@ -7,6 +7,7 @@ import com.purchase.order.service.payment.RegisterOrderService;
 import com.purchase.order.command.OrderProductCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderProductService {
@@ -17,6 +18,7 @@ public class OrderProductService {
         this.registerOrderService = registerOrderService;
     }
 
+    @Transactional
     public PgResponse processOrder(OrderProductCommand orderProductCommand) {
         IPaymentService paymentService = PaymentFactory.getPgService(orderProductCommand);
         PgResponse pgResponse = paymentService.paymentToPg();
