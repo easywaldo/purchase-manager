@@ -5,7 +5,9 @@ import com.purchase.category.repository.CategoryRepository;
 import com.purchase.member.entity.Member;
 import com.purchase.member.repository.MemberRepository;
 import com.purchase.order.entity.OrderInfo;
+import com.purchase.order.entity.OrderPayment;
 import com.purchase.order.repository.OrderInfoRepository;
+import com.purchase.order.repository.OrderPaymentRepository;
 import com.purchase.product.entity.Product;
 import com.purchase.product.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootApplication
 public class PurchaseProductApplication {
@@ -26,6 +29,7 @@ public class PurchaseProductApplication {
     @Bean
     public CommandLineRunner demo(
         MemberRepository memberRepository,
+        OrderPaymentRepository orderPaymentRepository,
         OrderInfoRepository orderInfoRepository,
         CategoryRepository categoryRepository,
         ProductRepository productRepository) {
@@ -134,12 +138,20 @@ public class PurchaseProductApplication {
                     .build())
             );
 
+            var orderPayment = orderPaymentRepository.save(OrderPayment.builder()
+                .txTid("nicepay-tx-20220101010210")
+                .orderId(UUID.randomUUID())
+                .memberSeq(1)
+                .orderPaymentSeq(1)
+                .build());
+
             orderInfoRepository.saveAll(List.of(
                 OrderInfo.builder()
                     .memberSeq(memberRepository.findById(1).get())
                     .paymentPrice(productRepository.findById(1).get().getProductPrice())
                     .orderDate(LocalDateTime.now())
                     .productSeq(productRepository.findById(1).get())
+                    .orderPaymentSeq(orderPayment)
                     .orderInfoSeq(1)
                     .build()
             ));

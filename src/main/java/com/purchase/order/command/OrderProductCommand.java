@@ -1,4 +1,4 @@
-package com.purchase.product.command;
+package com.purchase.order.command;
 
 import lombok.Builder;
 import lombok.Getter;

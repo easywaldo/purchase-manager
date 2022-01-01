@@ -7,7 +7,7 @@ import com.purchase.order.exception.OrderProcessException;
 import com.purchase.order.repository.OrderInfoRepository;
 import com.purchase.order.repository.OrderPaymentRepository;
 import com.purchase.order.response.PgResponse;
-import com.purchase.product.command.OrderProductCommand;
+import com.purchase.order.command.OrderProductCommand;
 import com.purchase.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +38,7 @@ public class RegisterOrderService {
 
     @Transactional(rollbackFor = OrderProcessException.class)
     public OrderPayment processOrder(OrderProductCommand orderProductCommand,
+                                     IPaymentService paymentService,
                                      PgResponse pgResponse) {
         try {
             var result = this.orderPaymentRepository.save(OrderPayment.builder()
@@ -57,7 +58,7 @@ public class RegisterOrderService {
         }
         catch(Exception ex) {
             throw OrderProcessException.builder()
-                .pgTransactionId(orderProductCommand.getPgTransactionId())
+                .paymentService(paymentService)
                 .pgResponse(pgResponse)
                 .build();
         }

@@ -1,6 +1,7 @@
 package com.purchase.order.exception;
 
 import com.purchase.order.response.PgResponse;
+import com.purchase.order.service.payment.IPaymentService;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,18 +9,18 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class OrderProcessException extends RuntimeException {
-    private String pgTransactionId;
     private PgResponse pgResponse;
+    private IPaymentService paymentService;
 
     @Builder
-    public OrderProcessException(String pgTransactionId,
+    public OrderProcessException(IPaymentService paymentService,
                                  PgResponse pgResponse) {
-        this.pgTransactionId = pgTransactionId;
+        this.paymentService = paymentService;
         this.pgResponse = pgResponse;
-        failedOrderPgCancel();
+        failedOrderPgCancel(paymentService);
     }
 
-    public void failedOrderPgCancel() {
-        this.pgResponse.paymentCancelToPg();
+    public void failedOrderPgCancel(IPaymentService paymentService) {
+        this.paymentService.paymentToCancel();
     }
 }

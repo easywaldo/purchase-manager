@@ -19,13 +19,4 @@ public abstract class PgResponse {
         this.orderId = orderId;
         this.orderPaymentSeq = orderPaymentSeq;
     }
-
-    public void paymentToPg() {
-        // TODO: PG 승인 요청
-        this.isSuccess = true;
-    }
-
-    public void paymentCancelToPg() {
-        // TODO: PG 취소 요청
-    }
 }

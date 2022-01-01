@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class NaverPayPgResponseImpl extends PgResponse {
+public class NicePayPgResponseImpl extends PgResponse {
     private boolean isSuccess = false;
     private String txTid;
     private String resultCode;
@@ -17,7 +17,7 @@ public class NaverPayPgResponseImpl extends PgResponse {
     private Integer orderPaymentSeq;
 
     @Builder
-    public NaverPayPgResponseImpl(boolean isSuccess,
+    public NicePayPgResponseImpl(boolean isSuccess,
                                  String txTid,
                                  String resultCode,
                                  String resultMessage,

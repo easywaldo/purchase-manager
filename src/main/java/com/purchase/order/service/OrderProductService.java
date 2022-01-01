@@ -1,9 +1,10 @@
-package com.purchase.product.service;
+package com.purchase.order.service;
 
 import com.purchase.order.response.PgResponse;
+import com.purchase.order.service.payment.IPaymentService;
 import com.purchase.order.service.payment.PaymentFactory;
 import com.purchase.order.service.payment.RegisterOrderService;
-import com.purchase.product.command.OrderProductCommand;
+import com.purchase.order.command.OrderProductCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,10 @@ public class OrderProductService {
     }
 
     public PgResponse processOrder(OrderProductCommand orderProductCommand) {
-        PgResponse pgResponse = PaymentFactory.getPgService(orderProductCommand.getPgType()).paymentToPg();
+        IPaymentService paymentService = PaymentFactory.getPgService(orderProductCommand);
+        PgResponse pgResponse = paymentService.paymentToPg();
         if (pgResponse.isSuccess()) {
-            var orderPayment = registerOrderService.processOrder(orderProductCommand, pgResponse);
+            var orderPayment = registerOrderService.processOrder(orderProductCommand, paymentService, pgResponse);
             pgResponse.setOrderInfo(orderPayment.getOrderId(), orderPayment.getOrderPaymentSeq());
         }
         return pgResponse;

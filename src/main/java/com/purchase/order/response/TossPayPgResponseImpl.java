@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class NaverPayPgResponseImpl extends PgResponse {
+public class TossPayPgResponseImpl extends PgResponse {
     private boolean isSuccess = false;
     private String txTid;
     private String resultCode;
@@ -17,12 +17,12 @@ public class NaverPayPgResponseImpl extends PgResponse {
     private Integer orderPaymentSeq;
 
     @Builder
-    public NaverPayPgResponseImpl(boolean isSuccess,
-                                 String txTid,
-                                 String resultCode,
-                                 String resultMessage,
-                                 UUID orderId,
-                                 Integer orderPaymentSeq) {
+    public TossPayPgResponseImpl(boolean isSuccess,
+                                  String txTid,
+                                  String resultCode,
+                                  String resultMessage,
+                                  UUID orderId,
+                                  Integer orderPaymentSeq) {
         this.isSuccess = isSuccess;
         this.txTid = txTid;
         this.resultCode = resultCode;

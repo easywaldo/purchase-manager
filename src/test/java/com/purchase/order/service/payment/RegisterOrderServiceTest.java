@@ -3,7 +3,7 @@ package com.purchase.order.service.payment;
 import com.purchase.order.repository.OrderInfoRepository;
 import com.purchase.order.response.NaverPayPgResponseImpl;
 import com.purchase.order.response.PgResponse;
-import com.purchase.product.command.OrderProductCommand;
+import com.purchase.order.command.OrderProductCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,10 +33,12 @@ class RegisterOrderServiceTest {
                 .productSeq(1)
                 .build()))
             .build();
+        var paymentService = PaymentFactory.getPgService(orderProductCommand);
         PgResponse pgResponse = new NaverPayPgResponseImpl();
 
         // act
-        var result = this.registerOrderService.processOrder(orderProductCommand, pgResponse);
+        var result = this.registerOrderService.processOrder(
+            orderProductCommand, paymentService, pgResponse);
 
         // assert
         assertNotNull(result);
