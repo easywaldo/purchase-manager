@@ -1,6 +1,7 @@
 package com.purchase.product.entity;
 
 import com.purchase.category.entity.Category;
+import com.purchase.product.command.UpdateProductCommand;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,5 +57,13 @@ public class Product {
         this.productPrice = productPrice;
         this.createDate = createDate;
         this.updateDate = updateDate;
+    }
+
+    public void update(UpdateProductCommand updateCommand, Category category) {
+        this.productName = updateCommand.getProductName();
+        this.productPrice = updateCommand.getProductPrice();
+        this.productDescription = updateCommand.getProductDescription();
+        this.categorySeq = category;
+
     }
 }
