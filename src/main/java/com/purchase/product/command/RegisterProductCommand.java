@@ -42,7 +42,7 @@ public class RegisterProductCommand {
             .productName(this.productName)
             .productPrice(this.productPrice)
             .productDescription(this.productDescription)
-            .categorySeq(categoryRepository.findById(this.getCategorySeq()).get())
+            .category(categoryRepository.findById(this.getCategorySeq()).get())
             .build();
     }
 }

@@ -48,12 +48,12 @@ public class RegisterOrderService {
                 .build());
             this.orderInfoRepository.saveAll(orderProductCommand.getOrderItems().stream().collect(Collectors.toList())
                 .stream().map(x -> OrderInfo.builder()
-                    .productSeq(this.productRepository.findById(x.getProductSeq()).get())
+                    .product(this.productRepository.findById(x.getProductSeq()).get())
                     .orderDate(LocalDateTime.now())
                     .orderPaymentSeq(result)
                     .productCount(x.getProductCount())
                     .paymentPrice(this.productRepository.findById(x.getProductSeq()).get().getProductPrice() * x.getProductCount())
-                    .memberSeq(this.memberRepository.findById(orderProductCommand.getMemberSeq()).get())
+                    .member(this.memberRepository.findById(orderProductCommand.getMemberSeq()).get())
                     .build()).collect(Collectors.toList()));
             return result;
         }

@@ -28,16 +28,16 @@ public class OrderQueryGenerator {
     public List<OrderViewModel> selectOrderProductDetail(SelectOrderCommand selectOrderCommand) {
         var result = this.jpaQueryFactory.from(orderPayment)
             .innerJoin(orderInfo).on(orderPayment.orderPaymentSeq.eq(orderInfo.orderPaymentSeq.orderPaymentSeq))
-            .where(orderInfo.productSeq.productSeq.eq(selectOrderCommand.getProductSeq())
-                .and(orderInfo.memberSeq.memberSeq.eq(selectOrderCommand.getMemberSeq())))
+            .where(orderInfo.product.productSeq.eq(selectOrderCommand.getProductSeq())
+                .and(orderInfo.member.memberSeq.eq(selectOrderCommand.getMemberSeq())))
             .select(Projections.fields(OrderViewModel.class,
-                orderInfo.productSeq.productSeq,
-                orderInfo.productSeq.productName,
-                orderInfo.productSeq.productPrice,
-                orderInfo.productSeq.productDescription,
-                orderInfo.productSeq.createDate.as("productRegisterDate"),
-                orderInfo.productSeq.updateDate.as("productModifiedDate"),
-                orderInfo.productSeq.categorySeq.categorySeq,
+                orderInfo.product.productSeq,
+                orderInfo.product.productName,
+                orderInfo.product.productPrice,
+                orderInfo.product.productDescription,
+                orderInfo.product.createDate.as("productRegisterDate"),
+                orderInfo.product.updateDate.as("productModifiedDate"),
+                orderInfo.product.category.categorySeq,
                 orderInfo.orderDate,
                 orderInfo.paymentPrice,
                 orderInfo.productCount))
@@ -48,15 +48,15 @@ public class OrderQueryGenerator {
     public List<OrderViewModel> selectOrderList(SelectOrderCommand selectOrderCommand) {
         var result = this.jpaQueryFactory.from(orderPayment)
             .innerJoin(orderInfo).on(orderPayment.orderPaymentSeq.eq(orderInfo.orderPaymentSeq.orderPaymentSeq))
-            .where(orderInfo.memberSeq.memberSeq.eq(selectOrderCommand.getMemberSeq()))
+            .where(orderInfo.member.memberSeq.eq(selectOrderCommand.getMemberSeq()))
             .select(Projections.fields(OrderViewModel.class,
-                orderInfo.productSeq.productSeq,
-                orderInfo.productSeq.productName,
-                orderInfo.productSeq.productPrice,
-                orderInfo.productSeq.productDescription,
-                orderInfo.productSeq.createDate.as("productRegisterDate"),
-                orderInfo.productSeq.updateDate.as("productModifiedDate"),
-                orderInfo.productSeq.categorySeq.categorySeq,
+                orderInfo.product.productSeq,
+                orderInfo.product.productName,
+                orderInfo.product.productPrice,
+                orderInfo.product.productDescription,
+                orderInfo.product.createDate.as("productRegisterDate"),
+                orderInfo.product.updateDate.as("productModifiedDate"),
+                orderInfo.product.category.categorySeq,
                 orderInfo.orderDate,
                 orderInfo.paymentPrice,
                 orderInfo.productCount))

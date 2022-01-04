@@ -42,13 +42,13 @@ public class ProductQueryGenerator {
             whereClause.and(category.categoryName.contains(searchCommand.getCategoryName()));
         }
         var result = this.jpaQueryFactory.from(category)
-            .join(product).on(category.categorySeq.eq(product.categorySeq.categorySeq))
+            .join(product).on(category.categorySeq.eq(product.category.categorySeq))
             .where(whereClause)
             .select(Projections.fields(ProductViewModel.class,
                 product.productName,
                 product.productSeq,
-                product.categorySeq.categorySeq,
-                product.categorySeq.categoryName,
+                product.category.categorySeq,
+                product.category.categoryName,
                 product.productPrice))
             .fetch();
         return result;

@@ -110,14 +110,14 @@ public class PurchaseProductApplication {
 
             productRepository.saveAll(List.of(
                 Product.builder()
-                    .categorySeq(categoryRepository.findById(4).get())
+                    .category(categoryRepository.findById(4).get())
                     .productSeq(1)
                     .productName("노루표페인트시공")
                     .productPrice(10000)
                     .productDescription("노루표페인트로 시공해드립니다.")
                     .build(),
                 Product.builder()
-                    .categorySeq(categoryRepository.findById(10).get())
+                    .category(categoryRepository.findById(10).get())
                     .productSeq(2)
                     .productName("Java 웹서비스 구축")
                     .productPrice(20000)
@@ -147,11 +147,11 @@ public class PurchaseProductApplication {
 
             orderInfoRepository.saveAll(List.of(
                 OrderInfo.builder()
-                    .memberSeq(memberRepository.findById(1).get())
+                    .member(memberRepository.findById(1).get())
                     .productCount(3)
                     .paymentPrice(productRepository.findById(1).get().getProductPrice())
                     .orderDate(LocalDateTime.now())
-                    .productSeq(productRepository.findById(1).get())
+                    .product(productRepository.findById(1).get())
                     .orderPaymentSeq(orderPayment)
                     .orderInfoSeq(1)
                     .build()

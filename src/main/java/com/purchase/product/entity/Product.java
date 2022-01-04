@@ -21,9 +21,9 @@ public class Product {
     @Column(name = "product_seq")
     private Integer productSeq;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_seq", referencedColumnName = "category_seq")
-    private Category categorySeq;
+    private Category category;
 
     @Column(name = "product_name")
     private String productName;
@@ -44,14 +44,14 @@ public class Product {
 
     @Builder
     public Product(Integer productSeq,
-                   Category categorySeq,
+                   Category category,
                    String productName,
                    String productDescription,
                    Integer productPrice,
                    LocalDateTime createDate,
                    LocalDateTime updateDate) {
         this.productSeq = productSeq;
-        this.categorySeq = categorySeq;
+        this.category = category;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
@@ -63,7 +63,7 @@ public class Product {
         this.productName = updateCommand.getProductName();
         this.productPrice = updateCommand.getProductPrice();
         this.productDescription = updateCommand.getProductDescription();
-        this.categorySeq = category;
+        this.category = category;
 
     }
 }

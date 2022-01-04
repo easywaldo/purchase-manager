@@ -20,17 +20,17 @@ public class OrderInfo {
     @Column(name = "order_info_seq")
     private Integer orderInfoSeq;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_payment_seq", referencedColumnName = "order_payment_seq")
     private OrderPayment orderPaymentSeq;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_seq", referencedColumnName = "member_seq")
-    private Member memberSeq;
+    private Member member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_seq", referencedColumnName = "product_seq")
-    private Product productSeq;
+    private Product product;
 
     @Column(name = "order_date")
     private LocalDateTime orderDate;
@@ -44,15 +44,15 @@ public class OrderInfo {
     @Builder
     public OrderInfo(Integer orderInfoSeq,
                      OrderPayment orderPaymentSeq,
-                     Member memberSeq,
-                     Product productSeq,
+                     Member member,
+                     Product product,
                      LocalDateTime orderDate,
                      Integer productCount,
                      Integer paymentPrice) {
         this.orderInfoSeq = orderInfoSeq;
         this.orderPaymentSeq = orderPaymentSeq;
-        this.memberSeq = memberSeq;
-        this.productSeq = productSeq;
+        this.member = member;
+        this.product = product;
         this.orderDate = orderDate;
         this.productCount = productCount;
         this.paymentPrice = paymentPrice;
