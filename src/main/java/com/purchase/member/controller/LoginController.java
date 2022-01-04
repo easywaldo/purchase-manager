@@ -5,6 +5,7 @@ import com.purchase.member.command.LoginCommand;
 import com.purchase.member.service.AuthService;
 import com.purchase.member.service.CookieService;
 import com.purchase.member.service.LoginService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class LoginController {
         this.loginService = loginService;
     }
 
+    @ApiOperation(value = "회원 로그인에 대한 요청 및 결과를 리턴 합니다.", notes = "로그인 완료 시  회원인증 JWT 가 생성이 되어 쿠키에 설정됩니다.")
     @PostMapping(value = "/member/login")
     public Mono<ResponseEntity<?>> login(@RequestBody LoginCommand loginCommand,
                                          HttpServletRequest httpServletRequest,
@@ -53,6 +55,7 @@ public class LoginController {
         return Mono.just(ResponseEntity.ok().body(true));
     }
 
+    @ApiOperation(value = "회원 로그아웃에 대한 요청과 결과를 리턴합니다.", notes = "로그아웃 시 쿠키의 유저토큰을 삭제합니다.")
     @DeleteMapping(value = "/member/logout")
     public boolean login(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse) {

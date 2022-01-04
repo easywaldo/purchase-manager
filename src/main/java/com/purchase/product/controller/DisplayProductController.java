@@ -20,7 +20,7 @@ public class DisplayProductController {
         this.displayProductService = displayProductService;
     }
 
-    @ApiOperation(value = "상품전시서비스", notes = "상품에 대한 리스트를 조회한다.")
+    @ApiOperation(value = "상품전시서비스", notes = "상품에 대한 리스트를 조회합니다. 어드민용 상품리스트 조회와 수준이 현재는 동일하게 제공됩니다.")
     @PostMapping(value = "/display/product/")
     public List<ProductViewModel> displayProductList(@RequestBody SearchProductCommand searchProductCommand) {
         return this.displayProductService.selectProductList(searchProductCommand);

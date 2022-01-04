@@ -4,6 +4,7 @@ import com.purchase.order.command.OrderProductCommand;
 import com.purchase.order.command.OrderValidator;
 import com.purchase.order.response.OrderProcessResponse;
 import com.purchase.order.service.OrderProductService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -25,6 +26,7 @@ public class OrderProcessController {
         this.validator = new OrderValidator();
     }
 
+    @ApiOperation(value = "상품 주문을 요청 합니다.", notes = "상품을 선택하여 구매 지불이 완료된 상태에서 주문완료 요청을 진행합니다.")
     @PostMapping(value = "/order/")
     public Mono<ResponseEntity<?>> processOrder(@RequestBody OrderProductCommand orderProductCommand,
                                                 @ApiIgnore Errors errors) {

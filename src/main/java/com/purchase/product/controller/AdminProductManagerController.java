@@ -8,6 +8,7 @@ import com.purchase.product.dto.ProductViewModel;
 import com.purchase.product.service.AdminProductManagerService;
 import com.purchase.product.service.DisplayProductService;
 import com.purchase.querygenerator.command.SearchProductCommand;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ public class AdminProductManagerController {
         this.categoryRepository = categoryRepository;
     }
 
+    @ApiOperation(value = "어드민용 상품등록 기능을 제공합니다.", notes = "")
     @PostMapping(value = "/admin/register/product")
     public Mono<ResponseEntity<?>> registerProduct(@RequestBody RegisterProductCommand registerProductCommand) {
         var result = this.adminProductManagerService.registerProduct(registerProductCommand);
@@ -47,6 +49,7 @@ public class AdminProductManagerController {
         return Mono.just(ResponseEntity.ok().body(response));
     }
 
+    @ApiOperation(value = "어드민용 상품수정 기능을 제공합니다.", notes = "")
     @PostMapping(value = "/admin/update/product")
     public Mono<ResponseEntity<?>> updateProduct(@RequestBody UpdateProductCommand updateProductCommand) {
         var result = this.adminProductManagerService.updateProduct(updateProductCommand);
@@ -66,6 +69,7 @@ public class AdminProductManagerController {
         return Mono.just(ResponseEntity.ok().body(response));
     }
 
+    @ApiOperation(value = "어드민용 상품리스트 조회", notes = "현재 서비스 수준에서는 상품전시서비스에서 제공하는 수준과 동일한 역할을 수행합니다.")
     @PostMapping(value = "/admin/list/product/")
     public List<ProductViewModel> displayProductList(@RequestBody SearchProductCommand searchProductCommand) {
         return this.displayProductService.selectProductList(searchProductCommand);
