@@ -6,6 +6,9 @@
 2. 8088 포트로 접속이 가능 합니다. (http://localhost:8089/swagger-ui.html)
 3. Swagger 문서에 각 URI 에 대한 설명을 참고하여 상품구매 테스트 진행이 가능 합니다.
 
+### ERD
+![purchase-product-erd.png](purchase-product-erd.png)
+
 #### 패키지 구성
 - category
     - 상품카테고리에 대한 상품도메인에 대한 엔터티, 리포지토리(데이터영속성 계층) 을 제공합니다.
