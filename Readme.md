@@ -24,3 +24,9 @@
 #### 인메모리 H2 DB 정보
 http://localhost:8089/h2-console/
 - 계정 : sa / password
+
+#### Jacoco 를 통한 테스트 커버리지 확인
+- gradle task 목록에서 jacocoTestReport 를 실행
+- build/reports/tests/test/index.html
+
+![img.png](img.png)
